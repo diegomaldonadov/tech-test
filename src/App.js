@@ -20,12 +20,12 @@ function App() {
     if (socket) {
       socket.onopen = () => {
         console.log("WebSocket connection opened");
-        socket.send("prices");
+        socket.send("GNT18");
       };
 
       socket.onmessage = (event) => {
         const message = JSON.parse(event.data);
-        const newData = Object.entries(message.prices).map(
+        const newData = Object.entries(message).map(
           ([currency, { bid, ask }]) => ({
             currency,
             bid,
@@ -33,7 +33,7 @@ function App() {
           })
         );
         setData([newData]);
-        //console.log("WebSocket message received:", data);
+        console.log("WebSocket message received:", data);
       };
 
       socket.onclose = () => {
